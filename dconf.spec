@@ -1,5 +1,5 @@
 %define name dconf
-%define version 0.4
+%define version 0.4.1
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -14,7 +14,9 @@ License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: glib2-devel >= 2.25.6
+BuildRequires: glib2-devel >= 2.25.10
+BuildRequires: gtk+2-devel
+BuildRequires: libgee-devel
 BuildRequires: gobject-introspection-devel
 
 %description
@@ -53,6 +55,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %_bindir/dconf
+%_bindir/dconf-editor
 %_libexecdir/dconf-service
 %_libdir/gio/modules/libdconfsettings.*
 %_datadir/dbus-1/services/ca.desrt.dconf.service
