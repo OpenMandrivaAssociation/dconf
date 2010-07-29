@@ -1,5 +1,5 @@
 %define name dconf
-%define version 0.4.1
+%define version 0.4.2
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -21,6 +21,14 @@ BuildRequires: gobject-introspection-devel
 
 %description
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
+
+%package editor
+Summary: An editor for the Dconf configuration system
+Group: Graphical desktop/GNOME
+Requires: %name = %version-%release
+
+%description editor
+This is a graphical editor for the Dconf configuration system.
 
 %package -n %libname
 Group: System/Libraries
@@ -54,12 +62,16 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
+%doc NEWS
 %_bindir/dconf
-%_bindir/dconf-editor
 %_libexecdir/dconf-service
 %_libdir/gio/modules/libdconfsettings.*
 %_datadir/dbus-1/services/ca.desrt.dconf.service
 %_datadir/dbus-1/system-services/ca.desrt.dconf.service
+
+%files editor
+%defattr(-,root,root)
+%_bindir/dconf-editor
 
 %files -n %libname
 %defattr(-,root,root)
