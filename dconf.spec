@@ -1,5 +1,5 @@
 %define name dconf
-%define version 0.4.2
+%define version 0.5
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
@@ -17,6 +17,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: glib2-devel >= 2.25.10
 BuildRequires: gtk+2-devel
 BuildRequires: libgee-devel
+BuildRequires: vala-devel
 BuildRequires: gobject-introspection-devel
 
 %description
@@ -76,13 +77,13 @@ rm -rf %{buildroot}
 %files -n %libname
 %defattr(-,root,root)
 %_libdir/libdconf.so.%{major}*
-%_libdir/girepository-1.0/dconf-0.3.typelib
+#%_libdir/girepository-1.0/dconf-0.3.typelib
 
 %files -n %develname
 %defattr(-,root,root)
 %_libdir/libdconf.so
-%_libdir/libdconf.*a
 %_libdir/pkgconfig/dconf.pc
 %_includedir/dconf
-%_datadir/gir-1.0/dconf-0.3.gir
+#%_datadir/gir-1.0/dconf-0.3.gir
 %_datadir/gtk-doc/html/dconf
+%_datadir/vala/vapi/dconf*
