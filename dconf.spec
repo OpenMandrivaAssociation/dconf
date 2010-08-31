@@ -1,10 +1,10 @@
 %define name dconf
 %define version 0.5
-%define release %mkrel 1
+%define release %mkrel 2
 %define major 0
 %define libname %mklibname %name %major
 %define develname %mklibname -d %name
-
+%define giolibname %mklibname gio2.0_ 0
 Summary: Configuration backend for Glib
 Name: %{name}
 Version: %{version}
@@ -34,6 +34,8 @@ This is a graphical editor for the Dconf configuration system.
 %package -n %libname
 Group: System/Libraries
 Summary: Configuration backend library for Glib
+Requires(post): %giolibname >= 2.23.4-2mdv
+Requires(postun): %giolibname >= 2.23.4-2mdv
 
 %description -n %libname
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
@@ -61,12 +63,25 @@ rm -rf %{buildroot}
 %clean
 rm -rf %{buildroot}
 
+%post -n %{libname}
+%if %_lib != lib
+ %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
+%else
+ %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
+%endif
+
+%postun -n %{libname}
+%if %_lib != lib
+ %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
+%else
+ %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
+%endif
+
 %files
 %defattr(-,root,root)
 %doc NEWS
 %_bindir/dconf
 %_libexecdir/dconf-service
-%_libdir/gio/modules/libdconfsettings.*
 %_datadir/dbus-1/services/ca.desrt.dconf.service
 %_datadir/dbus-1/system-services/ca.desrt.dconf.service
 
@@ -77,6 +92,7 @@ rm -rf %{buildroot}
 %files -n %libname
 %defattr(-,root,root)
 %_libdir/libdconf.so.%{major}*
+%_libdir/gio/modules/libdconfsettings.*
 #%_libdir/girepository-1.0/dconf-0.3.typelib
 
 %files -n %develname
