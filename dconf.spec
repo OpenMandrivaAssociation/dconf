@@ -71,11 +71,13 @@ rm -rf %{buildroot}
 %endif
 
 %postun -n %{libname}
+if [ "$1" = "0" ]; then
 %if %_lib != lib
  %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
 %else
  %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
 %endif
+fi
 
 %files
 %defattr(-,root,root)
