@@ -95,13 +95,13 @@ fi
 %defattr(-,root,root)
 %_libdir/libdconf.so.%{major}*
 %_libdir/gio/modules/libdconfsettings.*
-#%_libdir/girepository-1.0/dconf-0.3.typelib
+%_libdir/girepository-1.0/dconf-0.3.typelib
 
 %files -n %develname
 %defattr(-,root,root)
 %_libdir/libdconf.so
 %_libdir/pkgconfig/dconf.pc
 %_includedir/dconf
-#%_datadir/gir-1.0/dconf-0.3.gir
+%_datadir/gir-1.0/dconf-0.3.gir
 %_datadir/gtk-doc/html/dconf
 %_datadir/vala/vapi/dconf*
