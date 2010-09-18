@@ -1,6 +1,6 @@
 %define name dconf
-%define version 0.5
-%define release %mkrel 2
+%define version 0.5.1
+%define release %mkrel 1
 %define major 0
 %define libname %mklibname %name %major
 %define develname %mklibname -d %name
@@ -14,11 +14,10 @@ License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: glib2-devel >= 2.25.10
+BuildRequires: glib2-devel >= 2.25.16
 BuildRequires: gtk+2-devel
-BuildRequires: libgee-devel
-BuildRequires: vala-devel
-BuildRequires: gobject-introspection-devel
+BuildRequires: vala-devel >= 0.9.5
+BuildRequires: gobject-introspection-devel >= 0.9.5
 
 %description
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
@@ -95,13 +94,13 @@ fi
 %defattr(-,root,root)
 %_libdir/libdconf.so.%{major}*
 %_libdir/gio/modules/libdconfsettings.*
-%_libdir/girepository-1.0/dconf-0.3.typelib
+%_libdir/girepository-1.0/dconf-1.0.typelib
 
 %files -n %develname
 %defattr(-,root,root)
 %_libdir/libdconf.so
 %_libdir/pkgconfig/dconf.pc
 %_includedir/dconf
-%_datadir/gir-1.0/dconf-0.3.gir
+%_datadir/gir-1.0/dconf-1.0.gir
 %_datadir/gtk-doc/html/dconf
 %_datadir/vala/vapi/dconf*
