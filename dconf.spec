@@ -1,6 +1,6 @@
 %define name dconf
 %define version 0.5.1
-%define release %mkrel 1
+%define release %mkrel 2
 %define major 0
 %define libname %mklibname %name %major
 %define develname %mklibname -d %name
@@ -53,7 +53,7 @@ This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
 
 %build
 %configure2_5x
-%make
+%make libdconfsettings_so_LDFLAGS="-shared"
 
 %install
 rm -rf %{buildroot}
