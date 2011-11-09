@@ -102,6 +102,7 @@ fi
 %_bindir/dconf
 %_libexecdir/dconf-service
 %_datadir/dbus-1/services/ca.desrt.dconf.service
+%_datadir/dbus-1/system-services/ca.desrt.dconf.service
 
 %files editor
 %_bindir/dconf-editor
