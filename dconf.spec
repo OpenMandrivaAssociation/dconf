@@ -102,13 +102,13 @@ fi
 %{_bindir}/dconf
 %{_libexecdir}/dconf-service
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
-%{_datadir}/dbus-1/system-services/ca.desrt.dconf.service
 
 %files editor
 %{_bindir}/dconf-editor
 %{_datadir}/applications/dconf-editor.desktop
 %{_datadir}/dconf-editor/
 %{_datadir}/glib-2.0/schemas/ca.desrt.dconf-editor.gschema.xml
+%{_iconsdir}/hicolor/*/apps/dconf-editor.png
 
 %files -n %{libname}
 %{_libdir}/libdconf.so.%{major}*
