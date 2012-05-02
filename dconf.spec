@@ -1,5 +1,3 @@
-%define url_ver %(echo %{version}|cut -d. -f1,2)
-
 %define major 0
 %define dbusapi	1
 %define libname %mklibname %{name} %{major}
@@ -11,12 +9,12 @@
 
 Summary: Configuration backend for Glib
 Name: dconf
-Version: 0.12.0
+Version: 0.12.1
 Release: 1
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
-Source0: http://ftp.gnome.org/pub/GNOME/sources/vala/%{url_ver}/%{name}-%{version}.tar.xz
+Source0: http://ftp.gnome.org/pub/GNOME/sources/dconf/%{name}-%{version}.tar.xz
 
 BuildRequires: pkgconfig(dbus-1)
 BuildRequires: pkgconfig(gio-2.0)
