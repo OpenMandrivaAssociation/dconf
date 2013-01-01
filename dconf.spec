@@ -5,7 +5,7 @@
 %define dbusmaj	0
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
-%define libdbus %mklibname %{name}-dbus- %dbusapi %{major}
+%define libdbus %mklibname %{name}-dbus- %{dbusapi} %{dbusmaj}
 %define devdbus %mklibname %{name}-dbus -d
 
 %define giolibname %mklibname gio2.0_ 0
@@ -45,6 +45,8 @@ This is a graphical editor for the Dconf configuration system.
 Summary:	Configuration backend library for Glib
 Group:		System/Libraries
 Requires(post,postun):	%{giolibname} >= 2.23.4-2
+# this is b/c of the gio modules
+Obsoletes:	%{_lib}dconf0 < %{version}
 
 %description -n	%{libname}
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
