@@ -1,8 +1,8 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
 
-%define major	1
-%define dbusapi	1
-%define dbusmaj	0
+%define major 1
+%define dbusapi 1
+%define dbusmaj 0
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
 %define libdbus %mklibname %{name}-dbus- %{dbusapi} %{dbusmaj}
@@ -13,7 +13,7 @@
 Summary:	Configuration backend for Glib
 Name:		dconf
 Version:	0.14.1
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -29,6 +29,8 @@ BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libxml-2.0)
+Requires(post,postun):	gio2.0
+Requires(post,postun):	%{giolibname} >= 2.23.4-2
 
 %description
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
@@ -44,9 +46,10 @@ This is a graphical editor for the Dconf configuration system.
 %package -n	%{libname}
 Summary:	Configuration backend library for Glib
 Group:		System/Libraries
-Requires(post,postun):	%{giolibname} >= 2.23.4-2
+
 # this is b/c of the gio modules
 Obsoletes:	%{_lib}dconf0 < %{version}
+
 
 %description -n	%{libname}
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
@@ -88,14 +91,14 @@ This is a configuration backend for Dbus' GSettings and part of GNOME 3.0.
 
 %find_lang %{name}
 
-%post -n %{libname}
+%post
 %if %{_lib} != lib
  %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
 %else
  %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
 %endif
 
-%postun -n %{libname}
+%postun
 if [ "$1" = "0" ]; then
 %if %{_lib} != lib
  %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
