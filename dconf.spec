@@ -12,8 +12,8 @@
 
 Summary:	Configuration backend for Glib
 Name:		dconf
-Version:	0.14.1
-Release:	9
+Version:	0.22.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -83,7 +83,7 @@ This is a configuration backend for Dbus' GSettings and part of GNOME 3.0.
 %setup -q
 
 %build
-%configure2_5x
+%configure
 %make libdconfsettings_so_LDFLAGS="-shared"
 
 %install
@@ -92,7 +92,7 @@ This is a configuration backend for Dbus' GSettings and part of GNOME 3.0.
 %find_lang %{name}
 
 %post
-%if %{_lib} != lib
+%if "%{_lib}" != "lib"
  %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
 %else
  %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
@@ -100,7 +100,7 @@ This is a configuration backend for Dbus' GSettings and part of GNOME 3.0.
 
 %postun
 if [ "$1" = "0" ]; then
-%if %{_lib} != lib
+%if "%{_lib}" != "lib"
  %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
 %else
  %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
@@ -118,10 +118,12 @@ fi
 
 %files editor
 %{_bindir}/dconf-editor
-%{_datadir}/applications/dconf-editor.desktop
-%{_datadir}/dconf-editor/
+%{_datadir}/appdata/ca.desrt.dconf-editor.appdata.xml
+%{_datadir}/applications/ca.desrt.dconf-editor.desktop
+%{_datadir}/dbus-1/services/ca.desrt.dconf-editor.service
 %{_datadir}/glib-2.0/schemas/ca.desrt.dconf-editor.gschema.xml
 %{_iconsdir}/hicolor/*/apps/dconf-editor.png
+%{_iconsdir}/HighContrast/*/apps/dconf-editor.png
 %{_mandir}/man1/dconf-editor.1*
 
 %files -n %{libname}
