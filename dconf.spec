@@ -89,8 +89,6 @@ This is a configuration backend for Dbus' GSettings and part of GNOME 3.0.
 %install
 %makeinstall_std
 
-%find_lang %{name}
-
 %post
 %if "%{_lib}" != "lib"
  %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
@@ -107,7 +105,7 @@ if [ "$1" = "0" ]; then
 %endif
 fi
 
-%files -f %{name}.lang
+%files
 %doc NEWS
 %{_bindir}/dconf
 %{_libexecdir}/dconf-service
