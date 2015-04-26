@@ -35,14 +35,6 @@ Requires(post,postun):	%{giolibname} >= 2.23.4-2
 %description
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
 
-%package	editor
-Summary:	An editor for the Dconf configuration system
-Group:		Graphical desktop/GNOME
-Requires:	%{name} = %{version}-%{release}
-
-%description	editor
-This is a graphical editor for the Dconf configuration system.
-
 %package -n	%{libname}
 Summary:	Configuration backend library for Glib
 Group:		System/Libraries
@@ -113,16 +105,6 @@ fi
 %{_datadir}/bash-completion/completions/dconf
 %{_mandir}/man1/dconf.1*
 %{_mandir}/man1/dconf-service.1*
-
-%files editor
-%{_bindir}/dconf-editor
-%{_datadir}/appdata/ca.desrt.dconf-editor.appdata.xml
-%{_datadir}/applications/ca.desrt.dconf-editor.desktop
-%{_datadir}/dbus-1/services/ca.desrt.dconf-editor.service
-%{_datadir}/glib-2.0/schemas/ca.desrt.dconf-editor.gschema.xml
-%{_iconsdir}/hicolor/*/apps/dconf-editor.png
-%{_iconsdir}/HighContrast/*/apps/dconf-editor.png
-%{_mandir}/man1/dconf-editor.1*
 
 %files -n %{libname}
 %{_libdir}/libdconf.so.%{major}*
