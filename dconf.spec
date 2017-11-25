@@ -1,19 +1,21 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
 
 %define major 1
-%define dbusapi 1
-%define dbusmaj 0
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
-%define libdbus %mklibname %{name}-dbus- %{dbusapi} %{dbusmaj}
-%define devdbus %mklibname %{name}-dbus -d
 
 %define giolibname %mklibname gio2.0_ 0
 
+# From 0.24.x -- just to be obsoleted
+%define dbusapi 1
+%define dbusmaj 0
+%define libdbus %mklibname %{name}-dbus- %{dbusapi} %{dbusmaj}
+%define devdbus %mklibname %{name}-dbus -d
+
 Summary:	Configuration backend for Glib
 Name:		dconf
-Version:	0.24.0
-Release:	4
+Version:	0.26.1
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -41,6 +43,7 @@ Group:		System/Libraries
 
 # this is b/c of the gio modules
 Obsoletes:	%{_lib}dconf0 < %{version}
+Obsoletes:	%{libdbus} < %{EVRD}
 
 
 %description -n	%{libname}
@@ -51,25 +54,10 @@ Summary:	Configuration backend library for Glib - development files
 Group:		Development/C
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
+Obsoletes:	%{devdbus} < %{EVRD}
 
 %description -n	%{devname}
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
-
-%package -n	%{libdbus}
-Summary:	Configuration backend library for Dbus
-Group:		System/Libraries
-
-%description -n	%{libdbus}
-This is a configuration backend for Dbus' GSettings and part of GNOME 3.0.
-
-%package -n	%{devdbus}
-Summary:	Configuration backend library for Dbus - development files
-Group:		Development/C
-Provides:	dconf-dbus-devel = %{version}-%{release}
-Requires:	%{libdbus} = %{version}-%{release}
-
-%description -n	%{devdbus}
-This is a configuration backend for Dbus' GSettings and part of GNOME 3.0.
 
 %prep
 %setup -q
@@ -117,12 +105,3 @@ fi
 %{_datadir}/gtk-doc/html/dconf
 %{_datadir}/vala/vapi/dconf*
 %{_mandir}/man7/dconf.7*
-
-%files -n %{libdbus}
-%{_libdir}/libdconf-dbus-%{dbusapi}.so.%{dbusmaj}*
-
-%files -n %{devdbus}
-%{_includedir}/dconf-dbus*/
-%{_libdir}/pkgconfig/dconf-dbus*.pc
-%{_libdir}/libdconf-dbus*.so
-

@@ -1,5 +1,2 @@
-removed_sources:
-  dconf-0.14.1.tar.xz: 1983e832f03408ebb8544064604dd2d4379c47eb
-  dconf-0.22.0.tar.xz: d1a03938451b19a53f0d2fd09b6c737542fdd4c4
 sources:
-  dconf-0.24.0.tar.xz: 81fa57987b8ca92ec4b11225358356ea7e2d5391
+  dconf-0.26.1.tar.xz: e8c8b7e86079088661f346a2032d4a53e892a7ea
