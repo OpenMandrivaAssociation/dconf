@@ -14,13 +14,13 @@
 
 Summary:	Configuration backend for Glib
 Name:		dconf
-Version:	0.26.1
+Version:	0.27.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/%{url_ver}/%{name}-%{version}.tar.xz
-
+BuildRequires:	meson
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	xsltproc
@@ -63,15 +63,15 @@ This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
 %setup -q
 
 %build
-%configure
-%make libdconfsettings_so_LDFLAGS="-shared"
+%meson
+%meson_build
 
 %install
-%makeinstall_std
+%meson_install
 
 %post
 %if "%{_lib}" != "lib"
- %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
+ %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules
 %else
  %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
 %endif
