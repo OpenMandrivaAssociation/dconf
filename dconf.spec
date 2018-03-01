@@ -21,9 +21,6 @@ Group:		System/Libraries
 Url:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/%{url_ver}/%{name}-%{version}.tar.xz
 BuildRequires:	meson
-BuildRequires:	gtk-doc
-BuildRequires:	intltool
-BuildRequires:	xsltproc
 BuildRequires:	vala-devel
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(gio-2.0)
@@ -91,8 +88,6 @@ fi
 %{_libexecdir}/dconf-service
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_datadir}/bash-completion/completions/dconf
-%{_mandir}/man1/dconf.1*
-%{_mandir}/man1/dconf-service.1*
 
 %files -n %{libname}
 %{_libdir}/libdconf.so.%{major}*
@@ -102,6 +97,4 @@ fi
 %{_libdir}/libdconf.so
 %{_libdir}/pkgconfig/dconf.pc
 %{_includedir}/dconf/
-%{_datadir}/gtk-doc/html/dconf
 %{_datadir}/vala/vapi/dconf*
-%{_mandir}/man7/dconf.7*
