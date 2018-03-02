@@ -66,6 +66,9 @@ This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
 %install
 %meson_install
 
+# (tpg) remove double slashes
+sed -i -e 's#//#/#g' %{buildroot}%{_libdir}/pkgconfig/dconf.pc
+
 %post
 %if "%{_lib}" != "lib"
  %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules
