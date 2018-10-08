@@ -14,7 +14,7 @@
 
 Summary:	Configuration backend for Glib
 Name:		dconf
-Version:	0.28.0
+Version:	0.30.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -22,6 +22,7 @@ Url:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/%{url_ver}/%{name}-%{version}.tar.xz
 BuildRequires:	meson
 BuildRequires:	vala-devel
+BuildRequires:	bash-completion-devel
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
@@ -86,17 +87,18 @@ if [ "$1" = "0" ]; then
 fi
 
 %files
-%doc NEWS
 %{_bindir}/dconf
 %{_libexecdir}/dconf-service
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_datadir}/bash-completion/completions/dconf
+%{_mandir}/man*/*
 
 %files -n %{libname}
 %{_libdir}/libdconf.so.%{major}*
 %{_libdir}/gio/modules/libdconfsettings.*
 
 %files -n %{devname}
+%doc NEWS
 %{_libdir}/libdconf.so
 %{_libdir}/pkgconfig/dconf.pc
 %{_includedir}/dconf/
