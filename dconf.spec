@@ -22,6 +22,7 @@ Url:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/%{url_ver}/%{name}-%{version}.tar.xz
 BuildRequires:	meson
 BuildRequires:	vala-devel
+BuildRequires:	vala
 BuildRequires:	bash-completion-devel
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(gio-2.0)
@@ -29,6 +30,11 @@ BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(gmodule-2.0)
+BuildRequires:	pkgconfig(bash-completion)
+BuildRequires:	gtk-doc
+BuildRequires:	intltool
+Requires:	dbus
 Requires(post,postun):	gio2.0
 Requires(post,postun):	%{giolibname} >= 2.23.4-2
 
@@ -59,47 +65,48 @@ This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
 
 %prep
 %setup -q
+%autopatch -p1
 
 %build
-%meson
+%meson -Dgtk_doc=true
 %meson_build
 
 %install
 %meson_install
-
-# (tpg) remove double slashes
-sed -i -e 's#//#/#g' %{buildroot}%{_libdir}/pkgconfig/dconf.pc
+#we need this beacuse ibus and gdm installs file there
+install -d %{buildroot}%{_sysconfdir}/dconf/db
+install -d %{buildroot}%{_sysconfdir}/dconf/profile
 
 %post
-%if "%{_lib}" != "lib"
- %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules
-%else
- %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
-%endif
+%{_bindir}/gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 
 %postun
 if [ "$1" = "0" ]; then
-%if "%{_lib}" != "lib"
- %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
-%else
- %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
-%endif
+ %{_bindir}/gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
 fi
 
-%files
-%{_bindir}/dconf
-%{_libexecdir}/dconf-service
-%{_datadir}/dbus-1/services/ca.desrt.dconf.service
-%{_datadir}/bash-completion/completions/dconf
-%{_mandir}/man*/*
+%check
+#meson_test
 
-%files -n %{libname}
-%{_libdir}/libdconf.so.%{major}*
+%files
+%doc NEWS
+%dir %{_sysconfdir}/dconf
+%dir %{_sysconfdir}/dconf/db
+%dir %{_sysconfdir}/dconf/profile
+%{_bindir}/dconf
+%{_mandir}/man?/dconf.*
+%{_mandir}/man1/dconf-service.*
+%{_libexecdir}/dconf-service
+%{_datadir}/bash-completion/completions/dconf
+%{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_libdir}/gio/modules/libdconfsettings.*
 
+%files -n %{libname}
+%{_libdir}/libdconf.so.%{major}{,.*}
+
 %files -n %{devname}
-%doc NEWS
+%doc %{_datadir}/gtk-doc/html/dconf
 %{_libdir}/libdconf.so
 %{_libdir}/pkgconfig/dconf.pc
-%{_includedir}/dconf/
+%{_includedir}/dconf
 %{_datadir}/vala/vapi/dconf*
