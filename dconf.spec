@@ -14,7 +14,7 @@
 
 Summary:	Configuration backend for Glib
 Name:		dconf
-Version:	0.32.0
+Version:	0.34.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
