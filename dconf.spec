@@ -15,7 +15,7 @@
 Summary:	Configuration backend for Glib
 Name:		dconf
 Version:	0.36.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -35,6 +35,7 @@ BuildRequires:	pkgconfig(bash-completion)
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
 Requires:	dbus
+Requires:	glib2.0-common
 Requires(post,postun):	gio2.0
 Requires(post,postun):	%{giolibname} >= 2.23.4-2
 
@@ -44,11 +45,9 @@ This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
 %package -n	%{libname}
 Summary:	Configuration backend library for Glib
 Group:		System/Libraries
-
 # this is b/c of the gio modules
 Obsoletes:	%{_lib}dconf0 < %{version}
 Obsoletes:	%{libdbus} < %{EVRD}
-
 
 %description -n	%{libname}
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
@@ -64,8 +63,7 @@ Obsoletes:	%{devdbus} < %{EVRD}
 This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 %build
 %meson -Dgtk_doc=true
@@ -73,20 +71,16 @@ This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
 
 %install
 %meson_install
+
 #we need this beacuse ibus and gdm installs file there
 install -d %{buildroot}%{_sysconfdir}/dconf/db
 install -d %{buildroot}%{_sysconfdir}/dconf/profile
 
-%post
-%{_bindir}/gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
-
-%postun
-if [ "$1" = "0" ]; then
- %{_bindir}/gio-querymodules-%{__isa_bits} %{_libdir}/gio/modules
-fi
-
 %check
 #meson_test
+
+%posttrans
+dconf update
 
 %files
 %doc NEWS
