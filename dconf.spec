@@ -32,8 +32,10 @@ BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(bash-completion)
+BuildRequires:  pkgconfig(systemd)
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
+BuildRequires:  systemd
 Requires:	dbus
 Requires:	glib2.0-common
 Requires(post,postun):	gio2.0
@@ -94,6 +96,7 @@ dconf update
 %{_datadir}/bash-completion/completions/dconf
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_libdir}/gio/modules/libdconfsettings.*
+%{_userunitdir}/dconf.service
 
 %files -n %{libname}
 %{_libdir}/libdconf.so.%{major}{,.*}
