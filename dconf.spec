@@ -15,7 +15,7 @@
 Summary:	Configuration backend for Glib
 Name:		dconf
 Version:	0.40.0
-Release:	6
+Release:	7
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
