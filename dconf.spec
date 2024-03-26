@@ -15,11 +15,11 @@
 Summary:	Configuration backend for Glib
 Name:		dconf
 Version:	0.40.0
-Release:	8
+Release:	9
 License:	LGPLv2+
 Group:		System/Libraries
-Url:		http://www.gnome.org/
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/%{url_ver}/%{name}-%{version}.tar.xz
+Url:		https://www.gnome.org/
+Source0:	https://ftp.gnome.org/pub/GNOME/sources/dconf/%{url_ver}/%{name}-%{version}.tar.xz
 BuildRequires:	meson
 BuildRequires:	vala-devel
 BuildRequires:	vala
