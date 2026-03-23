@@ -15,7 +15,7 @@
 Summary:	Configuration backend for Glib
 Name:		dconf
 Version:	0.49.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://www.gnome.org/
@@ -29,7 +29,7 @@ BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
-BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(libxml-2.0) >= 2.15.2
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(bash-completion)
 BuildRequires:  pkgconfig(systemd)
