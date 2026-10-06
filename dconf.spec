@@ -14,8 +14,8 @@
 
 Summary:	Configuration backend for Glib
 Name:		dconf
-Version:	0.49.0
-Release:	2
+Version:	51.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://www.gnome.org/
@@ -77,9 +77,6 @@ This is a configuration backend for Glib's GSettings and part of GNOME 3.0.
 #we need this beacuse ibus and gdm installs file there
 install -d %{buildroot}%{_sysconfdir}/dconf/db
 install -d %{buildroot}%{_sysconfdir}/dconf/profile
-
-%check
-#meson_test
 
 %posttrans
 dconf update
